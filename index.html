@@ -1,1 +1,159 @@
-<html><body>novelas cafe y masitas.com </body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novelas, Café & Masitas — Danila Saiegh</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="edge-svg" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="cardboard-edge" x="-2%" y="-1%" width="104%" height="102%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035 0.012" numOctaves="3" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="page">
+  <header class="site-header">
+    <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand-script" href="#top">Danila Saiegh <span aria-hidden="true">♡</span></a>
+    <nav class="site-nav" id="siteNav" aria-label="Principal">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#novelas">Novelas</a>
+      <a href="#el-libro">El libro</a>
+      <a href="#columnas">Columnas de radio</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Inicio">
+      <div class="hero-inner">
+        <h1 class="hero-title">Novelas, Café &amp; Masitas</h1>
+        <p class="hero-tagline">Historias que nos abrazan como un buen café.</p>
+      </div>
+    </section>
+
+    <section class="section sobre-mi" id="sobre-mi">
+      <div class="section-inner sobre-grid">
+        <div class="sobre-copy">
+          <h2>Sobre mí</h2>
+          <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
+          <p>
+            Soy Danila Saiegh. Escribo, cuento y acompaño historias de telenovela
+            con la misma calidez de un café con masitas. Acá vas a encontrar novelas
+            con corazón, columnas de radio y un libro hecho con amor.
+          </p>
+          <p>
+            Creo en los abrazos que deja una buena trama, en el mate o el café de
+            la tarde, y en esas escenas que se quedan para siempre.
+          </p>
+          <ul class="stamps" aria-label="Pilares">
+            <li class="stamp">
+              <span class="stamp-icon" aria-hidden="true">♡</span>
+              <span class="stamp-text">Novelas con corazón</span>
+            </li>
+            <li class="stamp">
+              <span class="stamp-icon" aria-hidden="true">☕</span>
+              <span class="stamp-text">Café siempre</span>
+            </li>
+            <li class="stamp">
+              <span class="stamp-icon" aria-hidden="true">🍪</span>
+              <span class="stamp-text">Y masitas siempre</span>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+    </section>
+
+    <section class="section el-libro" id="el-libro">
+      <div class="section-inner libro-grid">
+        <div class="libro-visual">
+          <img class="libro-img" src="libro cafe y masitas.png" alt="Libro Novelas, Café y Masitas con café y masitas">
+        </div>
+        <div class="libro-copy">
+          <h2>El libro</h2>
+          <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
+          <p>
+            <strong>Novelas, Café &amp; Masitas</strong> reúne historias, fotos y
+            anécdotas alrededor de las telenovelas que nos marcaron. Una edición
+            especial para leer despacio, con una taza cerca.
+          </p>
+          <p>
+            Ideal para regalar o para acompañar una tarde de novelas, café y masitas.
+          </p>
+          <a class="btn btn-outline" href="#el-libro">Conseguí tu ejemplar ☕</a>
+          <ul class="libro-features">
+            <li>
+              <span class="feature-icon" aria-hidden="true">📖</span>
+              <span>Edición especial</span>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">♡</span>
+              <span>Con fotos y anécdotas</span>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">☕</span>
+              <span>Hecho con amor y masitas</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section radio-section" id="columnas">
+      <div class="section-inner">
+        <header class="section-header" id="novelas">
+          <h2>Columnas de Radio</h2>
+          <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
+          <p class="intro">Escuchá cada columna (20 minutos) sobre tus telenovelas favoritas.</p>
+        </header>
+
+        <div class="radio-browser">
+          <aside class="novela-list" aria-label="Lista de telenovelas">
+            <div class="list-title">TELENOVELAS</div>
+            <div id="novelaList" class="list-items">
+              <p class="loading">Cargando novelas…</p>
+            </div>
+          </aside>
+          <section class="episodes" aria-live="polite">
+            <div id="novelaHeader" class="novela-header"></div>
+            <div id="player" class="player"></div>
+            <div id="episodeList" class="episode-list"></div>
+          </section>
+        </div>
+
+        <div class="mobile-accordion" id="mobileAccordion"></div>
+
+        <div class="radio-cta-wrap">
+          <button class="btn btn-outline btn-wide" type="button" id="verMas">Ver más telenovelas 📻</button>
+        </div>
+
+        <div class="csv-loader">
+          <label for="csvFile">Abrir otro CSV</label>
+          <input id="csvFile" type="file" accept=".csv,text/csv">
+          <small>La página carga automáticamente <code>telenovelas.csv</code>.</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <img class="footer-img" src="footer.png" alt="">
+    <p class="brand-script footer-brand">Danila Saiegh</p>
+    <ul class="socials" aria-hidden="true"></ul>
+    <nav class="footer-social-hit" aria-label="Redes">
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"></a>
+      <a href="https://spotify.com" target="_blank" rel="noopener" aria-label="Spotify"></a>
+    </nav>
+  </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
