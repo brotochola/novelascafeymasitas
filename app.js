@@ -401,4 +401,67 @@ if (navToggle && siteNav) {
   });
 }
 
+const LANG_KEY = 'lang';
+const langButtons = document.querySelectorAll('[data-lang-btn]');
+
+function setLang(lang) {
+  const next = lang === 'en' ? 'en' : 'es';
+  document.documentElement.lang = next;
+  try {
+    localStorage.setItem(LANG_KEY, next);
+  } catch {
+    /* ignore quota / private mode */
+  }
+  langButtons.forEach(btn => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.langBtn === next));
+  });
+}
+
+try {
+  const saved = localStorage.getItem(LANG_KEY);
+  if (saved === 'en' || saved === 'es') setLang(saved);
+} catch {
+  /* ignore */
+}
+
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.dataset.langBtn));
+});
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const desktopParallax = window.matchMedia('(min-width: 761px)');
+const parallaxLayers = [
+  { el: document.querySelector('.hero-bg'), factor: 0.18 },
+  { el: document.querySelector('.sobre-mi'), factor: 0.12 },
+  { el: document.querySelector('.libro-img'), factor: 0.16 }
+];
+
+function tickParallax() {
+  const off = reduceMotion.matches || !desktopParallax.matches;
+  const vh = window.innerHeight;
+  parallaxLayers.forEach(({ el, factor }) => {
+    if (!el) return;
+    if (off) {
+      el.style.setProperty('--p', '0px');
+      return;
+    }
+    const rect = el.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2 - vh / 2;
+    el.style.setProperty('--p', (mid * factor).toFixed(1) + 'px');
+  });
+}
+
+let parallaxRaf = 0;
+function onParallaxScroll() {
+  if (parallaxRaf) return;
+  parallaxRaf = requestAnimationFrame(() => {
+    parallaxRaf = 0;
+    tickParallax();
+  });
+}
+
+window.addEventListener('scroll', onParallaxScroll, { passive: true });
+window.addEventListener('resize', onParallaxScroll, { passive: true });
+tickParallax();
+
 loadDefaultCSV();

@@ -7,105 +7,137 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <svg class="edge-svg" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="cardboard-edge" x="-2%" y="-1%" width="104%" height="102%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.035 0.012" numOctaves="3" seed="7" result="noise"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </svg>
   <div class="page">
-  <header class="site-header">
-    <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNav">
-      <span></span><span></span><span></span>
-    </button>
-    <a class="brand-script" href="#top">Danila Saiegh <span aria-hidden="true">♡</span></a>
-    <nav class="site-nav" id="siteNav" aria-label="Principal">
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#novelas">Novelas</a>
-      <a href="#el-libro">El libro</a>
-      <a href="#columnas">Columnas de radio</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero" aria-label="Inicio">
-      <div class="hero-inner">
-        <h1 class="hero-title">Novelas, Café &amp; Masitas</h1>
-        <p class="hero-tagline">Historias que nos abrazan como un buen café.</p>
+    <header class="site-header">
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="siteNav">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand-script" href="#top">Danila Saiegh</a>
+      <nav class="site-nav" id="siteNav" aria-label="Principal">
+        <a href="#sobre-mi"><span data-lang="es">Sobre mí</span><span data-lang="en">About me</span></a>
+        <a href="#novelas"><span data-lang="es">Novelas</span><span data-lang="en">Telenovelas</span></a>
+        <a href="#el-libro"><span data-lang="es">El libro</span><span data-lang="en">The book</span></a>
+        <a href="#columnas"><span data-lang="es">Columnas de radio</span><span data-lang="en">Radio columns</span></a>
+      </nav>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
       </div>
-    </section>
+    </header>
 
-    <section class="section sobre-mi" id="sobre-mi">
-      <div class="section-inner sobre-grid">
-        <div class="sobre-copy">
-          <h2>Sobre mí</h2>
-          <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
-          <p>
-            Soy Danila Saiegh. Escribo, cuento y acompaño historias de telenovela
-            con la misma calidez de un café con masitas. Acá vas a encontrar novelas
-            con corazón, columnas de radio y un libro hecho con amor.
-          </p>
-          <p>
-            Creo en los abrazos que deja una buena trama, en el mate o el café de
-            la tarde, y en esas escenas que se quedan para siempre.
-          </p>
-          <ul class="stamps" aria-label="Pilares">
-            <li class="stamp">
-              <span class="stamp-icon" aria-hidden="true">♡</span>
-              <span class="stamp-text">Novelas con corazón</span>
-            </li>
-            <li class="stamp">
-              <span class="stamp-icon" aria-hidden="true">☕</span>
-              <span class="stamp-text">Café siempre</span>
-            </li>
-            <li class="stamp">
-              <span class="stamp-icon" aria-hidden="true">🍪</span>
-              <span class="stamp-text">Y masitas siempre</span>
-            </li>
-          </ul>
+    <main id="top">
+      <section class="hero" aria-label="Inicio">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <h1 class="hero-title">
+            <span class="hero-line">Novelas, Café</span>
+            <span class="hero-line">&amp; Masitas</span>
+          </h1>
+          <p class="hero-en">Telenovelas, Coffee &amp; Pastries</p>
         </div>
+      </section>
 
+      <img class="zocalo" src="zocalo.png" alt="" aria-hidden="true">
 
-      </div>
-    </section>
-
-    <section class="section el-libro" id="el-libro">
-      <div class="section-inner libro-grid">
-        <div class="libro-visual">
-          <img class="libro-img" src="libro cafe y masitas.png" alt="Libro Novelas, Café y Masitas con café y masitas">
+      <section class="section sobre-mi" id="sobre-mi">
+        <div class="sobre-grid">
+          <div class="sobre-visual">
+            <img class="sobre-photo" src="IMG_4375.JPEG" alt="Danila Saiegh">
+          </div>
+          <div class="sobre-copy">
+            <h2 data-lang="es">Sobre mí</h2>
+            <h2 data-lang="en">About me</h2>
+            <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
+            <div data-lang="es">
+              <p>
+                Danila Saiegh es una periodista y socióloga argentina recibida en la Universidad de Buenos Aires (UBA) que
+                convirtió su educación sentimental frente al televisor de catorce pulgadas en una línea de investigación
+                cultural y feminista.
+                Co-conductora del influyente programa radial Furia Bebé, lleva años diseccionando las ficciones argentinas
+                en su columna "Novelas, Café y Masitas". Ganadora del Premio Lola Mora, Danila analiza el melodrama como
+                el archivo emocional y político de un país.
+              </p>
+              <details class="sobre-more">
+                <summary>Leer más</summary>
+                <p>
+                  Acaba de terminar Escenas de un capítulo anterior, un libro de ensayos sobre la telenovela donde
+                  reivindica el chisme, lo doméstico y lo romántico como saberes legítimos. Su trabajo desarma las
+                  estructuras del culebrón, la evolución de las masculinidades y las redes de amistad femenina en la
+                  pantalla, demostrando que estos productos televisivos funcionaron históricamente como un inesperado
+                  territorio de resistencia donde se trafican, a cuentagotas, retazos de emancipación.
+                  Con una amplia trayectoria en el mapa de medios argentino, colaboró para alguno de los diarios y revistas
+                  más importantes del país: Página/12, Revista Anfibia, Diario Perfil, Revista Brando y Cosecha Roja, medio
+                  con el cual obtuvo la beca de la Open Society Foundation para la cobertura de violencias y desigualdad. En
+                  su faceta audiovisual, es creadora del ciclo de YouTube Las Incansables, enfocado en rescatar historias de
+                  mujeres invisibilizadas, y dirigió el documental Mil Historias, un derecho junto a Amnistía Internacional
+                  y Women Equality Center (WEC).
+                </p>
+              </details>
+            </div>
+            <div data-lang="en">
+              <p>
+                Danila Saiegh is an Argentine journalist and sociologist with a degree from the University of Buenos Aires
+                (UBA), who turned her emotional coming-of-age in front of a fourteen-inch television into a field of
+                cultural and feminist research.
+                Co-host of the influential radio show Furia Bebé, she has spent years dissecting Argentine fiction in her
+                column "Novelas, Café y Masitas." A Lola Mora Award winner, Danila analyzes melodrama as the emotional and
+                political archive of a nation.
+              </p>
+              <details class="sobre-more">
+                <summary>Read more</summary>
+                <p>
+                  She has just finished Escenas de un capítulo anterior (Scenes from a Previous Episode), an essay
+                  collection on the soap opera that reclaims gossip, the domestic sphere, and the romantic as legitimate
+                  forms of knowledge. Her work deconstructs the mechanics of the culebrón, the evolution of masculinities,
+                  and on-screen female friendships, demonstrating how these television products historically served as an
+                  unexpected territory of resistance where fragments of emancipation were smuggled in, drop by drop.
+                  With an extensive career across the Argentine media landscape, she has contributed to some of the
+                  country’s most prominent newspapers and magazines: Página/12, Revista Anfibia, Diario Perfil, Revista
+                  Brando, and Cosecha Roja—a outlet through which she was awarded an Open Society Foundation fellowship to
+                  cover violence and inequality. In her audiovisual work, she is the creator of the YouTube series Las
+                  Incansables, dedicated to rescuing the stories of invisible women, and directed the documentary Mil
+                  Historias, un derecho alongside Amnesty International and the Women Equality Center (WEC).
+                </p>
+              </details>
+            </div>
+          </div>
         </div>
-        <div class="libro-copy">
-          <h2>El libro</h2>
-          <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
-          <p>
-            <strong>Novelas, Café &amp; Masitas</strong> reúne historias, fotos y
-            anécdotas alrededor de las telenovelas que nos marcaron. Una edición
-            especial para leer despacio, con una taza cerca.
-          </p>
-          <p>
-            Ideal para regalar o para acompañar una tarde de novelas, café y masitas.
-          </p>
-          <a class="btn btn-outline" href="#el-libro">Conseguí tu ejemplar ☕</a>
-          <ul class="libro-features">
-            <li>
-              <span class="feature-icon" aria-hidden="true">📖</span>
-              <span>Edición especial</span>
-            </li>
-            <li>
-              <span class="feature-icon" aria-hidden="true">♡</span>
-              <span>Con fotos y anécdotas</span>
-            </li>
-            <li>
-              <span class="feature-icon" aria-hidden="true">☕</span>
-              <span>Hecho con amor y masitas</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section radio-section" id="columnas">
-      <div class="section-inner">
+      <section class="section el-libro" id="el-libro">
+        <div class="libro-grid">
+          <div class="libro-visual">
+            <img class="libro-img" src="libro cafe y masitas.png"
+              alt="Libro Novelas, Café y Masitas con café y masitas">
+          </div>
+          <div class="libro-copy">
+            <h2 data-lang="es">Mi libro sobre telenovelas</h2>
+            <h2 data-lang="en">My book on telenovelas</h2>
+            <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
+            <p>
+              Un recorrido por las telenovelas que nos criaron: la reivindicación de un género como escuela sentimental,
+              archivo colectivo y anticipación de otros mundos.
+              Un ensayos sobre las telenovelas que nos criaron y sobre todo lo que podemos encontrar en ellas cuando
+              volvemos a mirarlas con otros ojos. Desde una mirada histórica, sociológica y feminista, recorre sus
+              heroínas y galanes, sus historias de amor y de amistad entre mujeres, sus familias, trabajos, conflictos y
+              chismes para preguntarse qué nos enseñaron sobre el deseo, los vínculos, el poder y las formas de vivir en
+              común. Una lectura crítica y afectiva de un género que, además de acompañar nuestras vidas, fue
+              construyendo sentidos sobre quiénes éramos, cómo cambiaba la sociedad y qué otros mundos podíamos
+              imaginar.
+            </p>
+            <p>
+              Ideal para regalar o para acompañar una tarde de novelas, café y masitas.
+            </p>
+            <a class="btn btn-outline" href="#el-libro">
+              <span data-lang="es">Leé el capítulo 1</span>
+              <span data-lang="en">Read Chapter 1</span>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="section radio-section" id="columnas">
         <header class="section-header" id="novelas">
           <h2>Columnas de Radio</h2>
           <div class="heart-rule" aria-hidden="true"><span></span>♡<span></span></div>
@@ -137,21 +169,20 @@
           <input id="csvFile" type="file" accept=".csv,text/csv">
           <small>La página carga automáticamente <code>telenovelas.csv</code>.</small>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <img class="footer-img" src="footer.png" alt="">
-    <p class="brand-script footer-brand">Danila Saiegh</p>
-    <ul class="socials" aria-hidden="true"></ul>
-    <nav class="footer-social-hit" aria-label="Redes">
-      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"></a>
-      <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"></a>
-      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"></a>
-      <a href="https://spotify.com" target="_blank" rel="noopener" aria-label="Spotify"></a>
-    </nav>
-  </footer>
+    <footer class="site-footer" role="contentinfo">
+      <img class="footer-img" src="footer.png" alt="">
+      <p class="brand-script footer-brand">Danila Saiegh</p>
+      <ul class="socials" aria-hidden="true"></ul>
+      <nav class="footer-social-hit" aria-label="Redes">
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"></a>
+        <a href="https://spotify.com" target="_blank" rel="noopener" aria-label="Spotify"></a>
+      </nav>
+    </footer>
   </div>
 
   <script src="app.js"></script>
