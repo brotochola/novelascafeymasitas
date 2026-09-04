@@ -109,7 +109,7 @@ h3 {
 }
 
 .libro-img {
-  width: min(100%, 550px);
+  width: min(100%, 700px);
   height: auto;
   margin-inline: auto;
   filter: drop-shadow(0 16px 28px rgba(255, 255, 255, 0.28));
@@ -990,7 +990,7 @@ h3 {
   }
 
   .libro-grid {
-    grid-template-columns: 1fr minmax(320px, 520px);
+    grid-template-columns: 1fr minmax(320px, 680px);
     gap: 48px;
   }
 
