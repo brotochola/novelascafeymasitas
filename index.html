@@ -3,7 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novelas, Café & Masitas — Danila Saiegh</title>
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        var lang = (q === 'en' || q === 'es') ? q : localStorage.getItem('lang');
+        if (lang === 'en' || lang === 'es') document.documentElement.lang = lang;
+      } catch (e) {}
+    })();
+  </script>
+  <title>Novelas, Café y Masitas | Danila Saiegh</title>
+  <meta name="description" content="Danila Saiegh, periodista y socióloga. Libro Escenas de un capítulo anterior y columnas de radio en Furia Bebé sobre las telenovelas que nos criaron.">
+  <meta name="author" content="Danila Saiegh">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7d3038">
+  <meta name="color-scheme" content="light">
+
+  <link rel="canonical" href="https://novelascafeymasitas.com/">
+  <link rel="alternate" hreflang="es" href="https://novelascafeymasitas.com/">
+  <link rel="alternate" hreflang="en" href="https://novelascafeymasitas.com/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://novelascafeymasitas.com/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Novelas, Café y Masitas">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://novelascafeymasitas.com/">
+  <meta property="og:title" content="Novelas, Café y Masitas | Danila Saiegh">
+  <meta property="og:description" content="Danila Saiegh, periodista y socióloga. Libro Escenas de un capítulo anterior y columnas de radio en Furia Bebé sobre las telenovelas que nos criaron.">
+  <meta property="og:image" content="https://novelascafeymasitas.com/libro%20cafe%20y%20masitas.png">
+  <meta property="og:image:alt" content="Libro Escenas de un capítulo anterior, de Danila Saiegh, con café y masitas">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Novelas, Café y Masitas | Danila Saiegh">
+  <meta name="twitter:description" content="Danila Saiegh, periodista y socióloga. Libro Escenas de un capítulo anterior y columnas de radio en Furia Bebé sobre las telenovelas que nos criaron.">
+  <meta name="twitter:image" content="https://novelascafeymasitas.com/libro%20cafe%20y%20masitas.png">
+  <meta name="twitter:image:alt" content="Libro Escenas de un capítulo anterior, de Danila Saiegh, con café y masitas">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://novelascafeymasitas.com/#website",
+        "url": "https://novelascafeymasitas.com/",
+        "name": "Novelas, Café y Masitas",
+        "alternateName": "Telenovelas, Coffee & Pastries",
+        "inLanguage": ["es", "en"],
+        "description": "Sitio de Danila Saiegh: libro y columnas de radio sobre telenovelas.",
+        "publisher": { "@id": "https://novelascafeymasitas.com/#danila" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://novelascafeymasitas.com/#danila",
+        "name": "Danila Saiegh",
+        "jobTitle": "Periodista y socióloga",
+        "description": "Periodista y socióloga argentina. Co-conductora de Furia Bebé y autora de Escenas de un capítulo anterior.",
+        "url": "https://novelascafeymasitas.com/",
+        "image": "https://novelascafeymasitas.com/IMG_4375.JPEG",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Universidad de Buenos Aires"
+        },
+        "award": "Premio Lola Mora",
+        "sameAs": [
+          "https://www.instagram.com/danilasaiegh/"
+        ]
+      },
+      {
+        "@type": "Book",
+        "@id": "https://novelascafeymasitas.com/#libro",
+        "name": "Escenas de un capítulo anterior",
+        "alternateName": "Novelas, Café y Masitas",
+        "inLanguage": "es",
+        "author": { "@id": "https://novelascafeymasitas.com/#danila" },
+        "url": "https://novelascafeymasitas.com/#el-libro",
+        "image": "https://novelascafeymasitas.com/libro%20cafe%20y%20masitas.png",
+        "description": "Ensayos sobre las telenovelas que nos criaron, desde una mirada histórica, sociológica y feminista."
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>

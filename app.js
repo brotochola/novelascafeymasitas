@@ -390,27 +390,80 @@ if (navToggle && siteNav) {
 }
 
 const LANG_KEY = 'lang';
+const SITE_URL = 'https://novelascafeymasitas.com';
 const langButtons = document.querySelectorAll('[data-lang-btn]');
+
+const SEO = {
+  es: {
+    title: 'Novelas, Café y Masitas | Danila Saiegh',
+    description: 'Danila Saiegh, periodista y socióloga. Libro Escenas de un capítulo anterior y columnas de radio en Furia Bebé sobre las telenovelas que nos criaron.',
+    locale: 'es_AR',
+    url: SITE_URL + '/',
+    imageAlt: 'Libro Escenas de un capítulo anterior, de Danila Saiegh, con café y masitas'
+  },
+  en: {
+    title: 'Telenovelas, Coffee & Pastries | Danila Saiegh',
+    description: 'Danila Saiegh, Argentine journalist and sociologist. The book Escenas de un capítulo anterior and radio columns on Furia Bebé about the telenovelas that raised us.',
+    locale: 'en_US',
+    url: SITE_URL + '/?lang=en',
+    imageAlt: 'Book Escenas de un capítulo anterior, by Danila Saiegh, with coffee and pastries'
+  }
+};
+
+function setMeta(selector, attr, value) {
+  const el = document.querySelector(selector);
+  if (el) el.setAttribute(attr, value);
+}
+
+function applySeo(lang) {
+  const seo = SEO[lang] || SEO.es;
+  document.title = seo.title;
+  setMeta('meta[name="description"]', 'content', seo.description);
+  setMeta('meta[property="og:title"]', 'content', seo.title);
+  setMeta('meta[property="og:description"]', 'content', seo.description);
+  setMeta('meta[property="og:locale"]', 'content', seo.locale);
+  setMeta('meta[property="og:url"]', 'content', seo.url);
+  setMeta('meta[property="og:image:alt"]', 'content', seo.imageAlt);
+  setMeta('meta[name="twitter:title"]', 'content', seo.title);
+  setMeta('meta[name="twitter:description"]', 'content', seo.description);
+  setMeta('meta[name="twitter:image:alt"]', 'content', seo.imageAlt);
+  setMeta('link[rel="canonical"]', 'href', seo.url);
+}
+
+function langFromUrl() {
+  const value = new URLSearchParams(location.search).get('lang');
+  return value === 'en' || value === 'es' ? value : null;
+}
 
 function setLang(lang) {
   const next = lang === 'en' ? 'en' : 'es';
   document.documentElement.lang = next;
+  applySeo(next);
   try {
     localStorage.setItem(LANG_KEY, next);
   } catch {
     /* ignore quota / private mode */
   }
+  const url = new URL(location.href);
+  if (next === 'en') url.searchParams.set('lang', 'en');
+  else url.searchParams.delete('lang');
+  history.replaceState(null, '', url.pathname + url.search + url.hash);
   langButtons.forEach(btn => {
     btn.setAttribute('aria-pressed', String(btn.dataset.langBtn === next));
   });
   if (novelas.length) render();
 }
 
-try {
-  const saved = localStorage.getItem(LANG_KEY);
-  if (saved === 'en' || saved === 'es') setLang(saved);
-} catch {
-  /* ignore */
+const fromUrl = langFromUrl();
+if (fromUrl) {
+  setLang(fromUrl);
+} else {
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === 'en' || saved === 'es') setLang(saved);
+  } catch {
+    /* ignore */
+  }
 }
 
 langButtons.forEach(btn => {
