@@ -1,11 +1,45 @@
 const CSV_URL = 'telenovelas.csv';
 
+const I18N = {
+  es: {
+    chapter: n => `Capítulo ${n}`,
+    radioColumn: 'COLUMNA DE RADIO',
+    protagonists: 'Protagonistas:',
+    listenFallback: 'Escuchá las columnas de radio de esta telenovela.',
+    noVideos: 'Todavía no hay videos para esta novela.',
+    cantPlay: 'No se puede reproducir este enlace acá.',
+    noLinks: 'Todavía no hay links cargados para esta novela.',
+    noColumns: 'Sin columnas cargadas.',
+    noNovelas: 'No encontré telenovelas en el CSV.',
+    csvFail: 'No pude leer el CSV.',
+    csvMissing: 'No se encontró <code>telenovelas.csv</code>.'
+  },
+  en: {
+    chapter: n => `Chapter ${n}`,
+    radioColumn: 'RADIO COLUMN',
+    protagonists: 'Starring:',
+    listenFallback: 'Listen to the radio columns on this telenovela.',
+    noVideos: 'There are no videos for this telenovela yet.',
+    cantPlay: 'This link can’t be played here.',
+    noLinks: 'No links loaded for this telenovela yet.',
+    noColumns: 'No columns loaded.',
+    noNovelas: 'No telenovelas found in the CSV.',
+    csvFail: 'Couldn’t read the CSV.',
+    csvMissing: '<code>telenovelas.csv</code> was not found.'
+  }
+};
+
+function t(key, ...args) {
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
+  const val = I18N[lang][key];
+  return typeof val === 'function' ? val(...args) : val;
+}
+
 const novelaList = document.querySelector('#novelaList');
 const episodeList = document.querySelector('#episodeList');
 const novelaHeader = document.querySelector('#novelaHeader');
 const player = document.querySelector('#player');
 const mobileAccordion = document.querySelector('#mobileAccordion');
-const csvFile = document.querySelector('#csvFile');
 
 let novelas = [];
 let selectedNovela = null;
@@ -84,6 +118,8 @@ function getColumnLinks(row) {
     .map((key, index) => {
       const url = row[key];
       if (!url) return null;
+      // Guion / Google Docs: ignore even if present in CSV
+      if (/docs\.google\.com/i.test(url)) return null;
       const match = key.match(/(\d+)/);
       const number = match ? match[1] : String(index + 1);
       return {
@@ -127,7 +163,6 @@ function youtubeId(url) {
 function mediaKind(url) {
   if (/youtube\.com|youtu\.be/i.test(url)) return 'youtube';
   if (/soundcloud\.com/i.test(url)) return 'soundcloud';
-  if (/docs\.google\.com/i.test(url)) return 'docs';
   return 'other';
 }
 
@@ -146,19 +181,15 @@ function embedSrc(url) {
 function renderPlayer(container, item) {
   if (!container) return;
   if (!item) {
-    container.innerHTML = '<p class="empty">Todavía no hay videos para esta novela.</p>';
+    container.innerHTML = `<p class="empty">${t('noVideos')}</p>`;
     return;
   }
   const src = embedSrc(item.url);
   if (src) {
-    container.innerHTML = `<iframe class="player-frame" src="${escapeAttr(src)}" title="${escapeAttr(item.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    container.innerHTML = `<iframe class="player-frame" src="${escapeAttr(src)}" title="${escapeAttr(t('chapter', item.number))}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
     return;
   }
-  if (mediaKind(item.url) === 'docs') {
-    container.innerHTML = `<p class="empty">Esta entrega es un guion, no un video. <a href="${escapeAttr(item.url)}" target="_blank" rel="noopener">Ver guion</a></p>`;
-    return;
-  }
-  container.innerHTML = '<p class="empty">No se puede reproducir este enlace acá.</p>';
+  container.innerHTML = `<p class="empty">${t('cantPlay')}</p>`;
 }
 
 function imageOrPlaceholder(src, className = 'cover') {
@@ -199,8 +230,7 @@ function episodeRow(item, index) {
   return `
     <button class="episode${active}" type="button" data-index="${index}">
       <span class="play-btn" aria-hidden="true">▶</span>
-      <span class="episode-title">${escapeHTML(item.title)}</span>
-      <span class="episode-duration">20:00</span>
+      <span class="episode-title">${escapeHTML(t('chapter', item.number))}</span>
     </button>`;
 }
 
@@ -211,16 +241,16 @@ function renderSelected(novela) {
   novelaHeader.innerHTML = `
     ${imageOrPlaceholder(novela.image, 'cover')}
     <div>
-      <p class="meta">${escapeHTML([novela.year, novela.channel].filter(Boolean).join(' · ') || 'COLUMNA DE RADIO')}</p>
+      <p class="meta">${escapeHTML([novela.year, novela.channel].filter(Boolean).join(' · ') || t('radioColumn'))}</p>
       <h2>${escapeHTML(novela.title)}</h2>
-      ${novela.protagonists ? `<p class="protagonists"><strong>Protagonistas:</strong> ${escapeHTML(novela.protagonists)}</p>` : ''}
-      <p class="description">${escapeHTML(novela.description || 'Escuchá las columnas de radio de esta telenovela.')}</p>
+      ${novela.protagonists ? `<p class="protagonists"><strong>${escapeHTML(t('protagonists'))}</strong> ${escapeHTML(novela.protagonists)}</p>` : ''}
+      <p class="description">${escapeHTML(novela.description || t('listenFallback'))}</p>
     </div>`;
 
   renderPlayer(player, novela.items[0] || null);
 
   if (!novela.items.length) {
-    episodeList.innerHTML = '<p class="empty">Todavía no hay links cargados para esta novela.</p>';
+    episodeList.innerHTML = `<p class="empty">${t('noLinks')}</p>`;
     return;
   }
 
@@ -255,10 +285,9 @@ function renderMobile() {
       ? novela.items.map((item, itemIndex) => `
         <button class="mobile-item${itemIndex === 0 && open ? ' active' : ''}" type="button" data-index="${itemIndex}">
           <span class="play-btn" aria-hidden="true">▶</span>
-          <span class="mobile-item-title">${escapeHTML(item.title)}</span>
-          <span class="mobile-item-duration">20:00</span>
+          <span class="mobile-item-title">${escapeHTML(t('chapter', item.number))}</span>
         </button>`).join('')
-      : '<p class="empty">Sin columnas cargadas.</p>';
+      : `<p class="empty">${t('noColumns')}</p>`;
 
     card.innerHTML = `
       <button class="mobile-trigger" type="button">
@@ -298,10 +327,10 @@ function renderMobile() {
 
 function render() {
   if (!novelas.length) {
-    novelaList.innerHTML = '<p class="error">No encontré telenovelas en el CSV.</p>';
+    novelaList.innerHTML = `<p class="error">${t('noNovelas')}</p>`;
     episodeList.innerHTML = '';
     player.innerHTML = '';
-    mobileAccordion.innerHTML = '<p class="error">No encontré telenovelas en el CSV.</p>';
+    mobileAccordion.innerHTML = `<p class="error">${t('noNovelas')}</p>`;
     return;
   }
   if (!selectedNovela || !novelas.some(n => n.title === selectedNovela.title)) {
@@ -319,7 +348,7 @@ function loadCSV(text) {
     render();
   } catch (error) {
     console.error(error);
-    novelaList.innerHTML = '<p class="error">No pude leer el CSV.</p>';
+    novelaList.innerHTML = `<p class="error">${t('csvFail')}</p>`;
   }
 }
 
@@ -329,18 +358,8 @@ async function loadDefaultCSV() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     loadCSV(await response.text());
   } catch {
-    novelaList.innerHTML = '<p class="error">No se encontró <code>telenovelas.csv</code>.</p>';
+    novelaList.innerHTML = `<p class="error">${t('csvMissing')}</p>`;
   }
-}
-
-if (csvFile) {
-  csvFile.addEventListener('change', event => {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => loadCSV(reader.result);
-    reader.readAsText(file, 'UTF-8');
-  });
 }
 
 function escapeHTML(value) {
@@ -384,6 +403,7 @@ function setLang(lang) {
   langButtons.forEach(btn => {
     btn.setAttribute('aria-pressed', String(btn.dataset.langBtn === next));
   });
+  if (novelas.length) render();
 }
 
 try {
