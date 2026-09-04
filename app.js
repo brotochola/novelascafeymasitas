@@ -1,5 +1,4 @@
 const CSV_URL = 'telenovelas.csv';
-const LIST_PREVIEW = 8;
 
 const novelaList = document.querySelector('#novelaList');
 const episodeList = document.querySelector('#episodeList');
@@ -7,10 +6,8 @@ const novelaHeader = document.querySelector('#novelaHeader');
 const player = document.querySelector('#player');
 const mobileAccordion = document.querySelector('#mobileAccordion');
 const csvFile = document.querySelector('#csvFile');
-const verMas = document.querySelector('#verMas');
 
 let novelas = [];
-let listExpanded = false;
 let selectedNovela = null;
 let selectedItemIndex = 0;
 
@@ -179,24 +176,10 @@ document.addEventListener('error', event => {
   el.replaceWith(span);
 }, true);
 
-function visibleCount() {
-  return listExpanded ? novelas.length : Math.min(LIST_PREVIEW, novelas.length);
-}
-
-function updateVerMas() {
-  if (!verMas) return;
-  const wrap = verMas.closest('.radio-cta-wrap');
-  const hide = listExpanded || novelas.length <= LIST_PREVIEW;
-  if (wrap) wrap.hidden = hide;
-  verMas.hidden = hide;
-}
-
 function renderDesktopList() {
   novelaList.innerHTML = '';
-  const shown = visibleCount();
 
-  novelas.forEach((novela, index) => {
-    if (index >= shown) return;
+  novelas.forEach(novela => {
     const button = document.createElement('button');
     button.className = 'novela-button';
     button.type = 'button';
@@ -260,10 +243,8 @@ function selectNovela(novela) {
 
 function renderMobile() {
   mobileAccordion.innerHTML = '';
-  const shown = visibleCount();
 
   novelas.forEach((novela, index) => {
-    if (index >= shown) return;
     const card = document.createElement('article');
     const open = selectedNovela ? selectedNovela.title === novela.title : index === 0;
     card.className = 'mobile-card' + (open ? ' open' : '');
@@ -321,7 +302,6 @@ function render() {
     episodeList.innerHTML = '';
     player.innerHTML = '';
     mobileAccordion.innerHTML = '<p class="error">No encontré telenovelas en el CSV.</p>';
-    updateVerMas();
     return;
   }
   if (!selectedNovela || !novelas.some(n => n.title === selectedNovela.title)) {
@@ -330,12 +310,10 @@ function render() {
   renderDesktopList();
   renderSelected(selectedNovela);
   renderMobile();
-  updateVerMas();
 }
 
 function loadCSV(text) {
   try {
-    listExpanded = false;
     novelas = groupNovelas(parseCSV(text));
     selectedNovela = novelas[0] || null;
     render();
@@ -362,15 +340,6 @@ if (csvFile) {
     const reader = new FileReader();
     reader.onload = () => loadCSV(reader.result);
     reader.readAsText(file, 'UTF-8');
-  });
-}
-
-if (verMas) {
-  verMas.addEventListener('click', () => {
-    listExpanded = true;
-    renderDesktopList();
-    renderMobile();
-    updateVerMas();
   });
 }
 
@@ -426,6 +395,12 @@ try {
 
 langButtons.forEach(btn => {
   btn.addEventListener('click', () => setLang(btn.dataset.langBtn));
+});
+
+document.querySelectorAll('.sobre-more').forEach(details => {
+  details.addEventListener('toggle', () => {
+    if (!details.open) details.open = true;
+  });
 });
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

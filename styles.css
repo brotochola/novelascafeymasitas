@@ -21,25 +21,9 @@
 }
 
 @font-face {
-  font-family: "Futura PT";
-  src: url("futura-pt/FuturaCyrillicBook.ttf") format("truetype");
+  font-family: "EB Garamond";
+  src: url("EMontserrat-Regular.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Futura PT";
-  src: url("futura-pt/FuturaCyrillicMedium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Futura PT";
-  src: url("futura-pt/FuturaCyrillicBold.ttf") format("truetype");
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -57,7 +41,7 @@
   --bg-pattern: url("bg-pattern.png");
   --hero-cream: #f7efe6;
   --font-display: Avigea, Georgia, serif;
-  --font-body: "Futura PT", Arial, sans-serif;
+  --font-body: "EB Garamond", Georgia, "Times New Roman", serif;
 }
 
 *,
@@ -125,7 +109,7 @@ h3 {
 }
 
 .libro-img {
-  width: min(100%, 480px);
+  width: min(100%, 550px);
   height: auto;
   margin-inline: auto;
   filter: drop-shadow(0 16px 28px rgba(255, 255, 255, 0.28));
@@ -328,10 +312,6 @@ h3 {
   color: var(--wine);
 }
 
-.btn-wide {
-  width: min(100%, 420px);
-}
-
 /* —— Hero / splash —— */
 .hero {
   position: relative;
@@ -378,6 +358,7 @@ h3 {
   font-family: var(--font-display);
   font-size: clamp(18px, 3.2vw, 32px);
   color: var(--hero-cream);
+  letter-spacing: 0.5px;
   text-shadow: 0 2px 14px rgba(40, 12, 16, 0.5);
 }
 
@@ -412,7 +393,7 @@ h3 {
   z-index: 1;
   display: grid;
   gap: 28px;
-  align-items: center;
+  align-items: start;
   width: min(100%, 1180px);
   margin-inline: auto;
 }
@@ -482,7 +463,33 @@ h3 {
 }
 
 .sobre-more[open] summary {
-  margin-bottom: 12px;
+  display: none;
+}
+
+.sobre-ig {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.sobre-ig a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.sobre-ig-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  object-fit: contain;
+  /* filter: brightness(0) invert(1); */
+}
+
+.sobre-ig a:hover {
+  text-decoration: underline;
 }
 
 /* —— Mi Libro —— */
@@ -659,6 +666,8 @@ h3 {
 .novela-header p {
   line-height: 1.5;
   margin: 7px 0 0;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 .meta {
@@ -962,7 +971,7 @@ h3 {
   .sobre-grid {
     grid-template-columns: minmax(280px, 46%) 1fr;
     gap: 40px;
-    align-items: center;
+    align-items: start;
   }
 
   .sobre-visual {
